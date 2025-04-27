@@ -66,17 +66,16 @@ public class ItemController {
 
     @PostMapping("items/{itemId}/edit") //해당 user가 상품 id 수정 권한이 있는지 한번더 체크해주는 게 좋음(보안취약점)
     public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form){
-//        Book book = new Book();
-//        book.setId(form.getId());
-//        book.setName(form.getName());
-//        book.setPrice(form.getPrice());
-//        book.setStockQuantity(form.getStockQuantity());
-//        book.setAuthor(form.getAuthor());
-//        book.setIsbn(form.getIsbn());
+        //Book book = new Book();
+        //book.setId(form.getId());
+        //book.setName(form.getName());
+        //book.setPrice(form.getPrice());
+        //book.setStockQuantity(form.getStockQuantity());
+        //book.setAuthor(form.getAuthor());
+        //book.setIsbn(form.getIsbn());
+        //itemService.saveItem(book);
 
         itemService.updateItem(itemId, form.getPrice(), form.getName(), form.getStockQuantity());
-
-        //itemService.saveItem(book);
         return "redirect:/items";
     }
 }

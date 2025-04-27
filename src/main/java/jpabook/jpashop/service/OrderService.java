@@ -8,9 +8,12 @@ import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly=true)
@@ -26,7 +29,8 @@ public class OrderService {
      */
     @Transactional
     public Long order(Long memberId, Long itemId, int count) {
-        
+        // 트랜잭션 안에서 영속성 상태를 유지하기 위해, 서비스 계층에서 핵심 비즈니스 로직을 처리하자
+
         //엔티티 조회
         Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
@@ -59,9 +63,7 @@ public class OrderService {
     }
 
     //검색
-    /*
-    public List<Order> findOrder(OrderSearch orderSearch){
-        return orderRepository.findAll();
+    public List<Order> findOrders(OrderSearch orderSearch){
+        return orderRepository.findAll(orderSearch);
     }
-    */
 }
